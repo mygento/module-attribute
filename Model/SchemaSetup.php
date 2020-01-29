@@ -23,13 +23,13 @@ class SchemaSetup
     private $eavSetupFactory;
 
     /**
-     * @var \Magento\Framework\Config\DataInterface
+     * @var \Mygento\Attribute\Model\Config\SchemaConfig
      */
     private $data;
 
     public function __construct(
         \Magento\Eav\Setup\EavSetupFactory $eavSetupFactory,
-        \Magento\Framework\Config\DataInterface $data,
+        \Mygento\Attribute\Model\Config\SchemaConfig $data,
         \Psr\Log\LoggerInterface $logger
     ) {
         $this->data = $data;
