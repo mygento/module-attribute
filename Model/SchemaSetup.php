@@ -40,7 +40,7 @@ class SchemaSetup
     public function update()
     {
         $eavSetup = $this->eavSetupFactory->create();
-        $products = $this->data->get('catalog_product');
+        $products = $this->data->get('catalog_product') ?? [];
 
         foreach ($products as $key => $params) {
             $params['user_defined'] = $params['user_defined'] ?? 1;
