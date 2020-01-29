@@ -12,6 +12,5 @@ class SchemaConfig
 {
     public function __construct()
     {
-        
     }
 }

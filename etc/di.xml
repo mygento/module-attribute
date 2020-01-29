@@ -14,4 +14,11 @@
             <argument name="cacheId" xsi:type="string">attribute_schema_config</argument>
         </arguments>
     </virtualType>
+
+    <type name="Mygento\Attribute\Model\SchemaSetup">
+        <arguments>
+            <argument name="data" xsi:type="object">Mygento\Attribute\Model\Config\SchemaConfig</argument>
+        </arguments>
+    </type>
+
 </config>
