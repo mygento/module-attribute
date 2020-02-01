@@ -46,7 +46,41 @@
                 </xs:unique>
             </xs:element>
         </xs:sequence>
+        <xs:sequence>
+            <xs:element name="attribute_set" type="attributeSetDeclaration" minOccurs="1" maxOccurs="unbounded">
+                <xs:unique name="uniqueFieldCode">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Attribute code must be unique
+                        </xs:documentation>
+                    </xs:annotation>
+                    <xs:selector xpath="attribute" />
+                    <xs:field xpath="@name" />
+                </xs:unique>
+            </xs:element>
+        </xs:sequence>
         <xs:attribute name="type" type="identifierType" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="attributeSetDeclaration">
+        <xs:annotation>
+            <xs:documentation>
+                Attribute Set declaration
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="attribute" type="partDeclaration" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="name" type="identifierType" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="partDeclaration">
+        <xs:annotation>
+            <xs:documentation>
+                Set Attribute declaration
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="code" type="identifierType" use="required" />
     </xs:complexType>
 
     <xs:complexType name="attributeDeclaration">

@@ -8,7 +8,9 @@
 
 namespace Mygento\Attribute\Model;
 
+use Magento\Catalog\Setup\CategorySetup;
 use Magento\Framework\Exception\LocalizedException;
+use Mygento\Attribute\Api\ConverterInterface;
 
 class SchemaSetup
 {
@@ -42,7 +44,20 @@ class SchemaSetup
         $eavSetup = $this->eavSetupFactory->create();
         $products = $this->data->get('catalog_product') ?? [];
 
-        foreach ($products as $key => $params) {
+        if (isset($products[ConverterInterface::ATTR])
+            && !empty($products[ConverterInterface::ATTR])) {
+            $this->createAttributes($eavSetup, $products[ConverterInterface::ATTR]);
+        }
+
+        if (isset($products[ConverterInterface::SET])
+            && !empty($products[ConverterInterface::SET])) {
+            $this->createAttributeSets($eavSetup, $products[ConverterInterface::SET]);
+        }
+    }
+
+    private function createAttributes(\Magento\Eav\Setup\EavSetup $eavSetup, array $config)
+    {
+        foreach ($config as $key => $params) {
             $params['user_defined'] = $params['user_defined'] ?? 1;
 
             try {
@@ -54,6 +69,20 @@ class SchemaSetup
             } catch (LocalizedException $e) {
                 echo $e->getMessage();
                 $this->logger->error($e->getMessage(), ['exception' => $e]);
+            }
+        }
+    }
+
+    private function createAttributeSets(\Magento\Eav\Setup\EavSetup $eavSetup, array $config)
+    {
+        $entity = CategorySetup::CATALOG_PRODUCT_ENTITY_TYPE_ID;
+        foreach ($config as $set => $list) {
+            if (!$eavSetup->getAttributeSet($entity, $set)) {
+                $eavSetup->addAttributeSet($entity, $set);
+            }
+            $setId = $eavSetup->getAttributeSet($entity, $set, 'attribute_set_id');
+            foreach ($list as $code) {
+                $eavSetup->addAttributeToSet($entity, $setId, 'General', $code);
             }
         }
     }
