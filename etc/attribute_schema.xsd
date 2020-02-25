@@ -45,10 +45,8 @@
                     <xs:field xpath="@code" />
                 </xs:unique>
             </xs:element>
-        </xs:sequence>
-        <xs:sequence>
             <xs:element name="attribute_set" type="attributeSetDeclaration" minOccurs="1" maxOccurs="unbounded">
-                <xs:unique name="uniqueFieldCode">
+                <xs:unique name="uniqueSetCode">
                     <xs:annotation>
                         <xs:documentation>
                             Attribute code must be unique
@@ -71,7 +69,7 @@
         <xs:sequence>
             <xs:element name="attribute" type="partDeclaration" minOccurs="1" maxOccurs="unbounded" />
         </xs:sequence>
-        <xs:attribute name="name" type="identifierType" use="required" />
+        <xs:attribute name="name" type="nameType" use="required" />
     </xs:complexType>
 
     <xs:complexType name="partDeclaration">
@@ -102,7 +100,7 @@
             </xs:documentation>
         </xs:annotation>
         <xs:attribute name="code" type="identifierType" use="required" />
-        <xs:attribute name="value" type="identifierType" />
+        <xs:attribute name="value" use="required" />
     </xs:complexType>
 
     <xs:simpleType name="identifierType">
@@ -113,6 +111,16 @@
         </xs:annotation>
         <xs:restriction base="xs:string">
             <xs:pattern value="[a-z_]+" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="nameType">
+        <xs:annotation>
+            <xs:documentation>
+                Identifier can contain only [a-zA-z_].
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-zA-z_]+" />
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
