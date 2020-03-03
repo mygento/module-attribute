@@ -16,7 +16,10 @@ class Reader extends \Magento\Framework\Config\Reader\Filesystem
         \Mygento\Attribute\Model\Config\SchemaLocator $schemaLocator,
         \Magento\Framework\Config\ValidationStateInterface $validationState,
         $fileName = 'attribute_schema.xml',
-        $idAttributes = [],
+        $idAttributes = [
+            '/config/entity/attribute' => 'code',
+            '/config/entity/attribute_set/attribute' => 'code'
+        ],
         $domDocumentClass = \Magento\Framework\Config\Dom::class,
         $defaultScope = 'global'
     ) {
