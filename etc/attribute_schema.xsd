@@ -34,28 +34,30 @@
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="attribute" type="attributeDeclaration" minOccurs="1" maxOccurs="unbounded">
-                <xs:unique name="uniqueFieldCode">
-                    <xs:annotation>
-                        <xs:documentation>
-                            Field code must be unique
-                        </xs:documentation>
-                    </xs:annotation>
-                    <xs:selector xpath="field" />
-                    <xs:field xpath="@code" />
-                </xs:unique>
-            </xs:element>
-            <xs:element name="attribute_set" type="attributeSetDeclaration" minOccurs="1" maxOccurs="unbounded">
-                <xs:unique name="uniqueSetCode">
-                    <xs:annotation>
-                        <xs:documentation>
-                            Attribute code must be unique
-                        </xs:documentation>
-                    </xs:annotation>
-                    <xs:selector xpath="attribute" />
-                    <xs:field xpath="@name" />
-                </xs:unique>
-            </xs:element>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="attribute" type="attributeDeclaration" minOccurs="1" maxOccurs="unbounded">
+                    <xs:unique name="uniqueFieldCode">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Field code must be unique
+                            </xs:documentation>
+                        </xs:annotation>
+                        <xs:selector xpath="field" />
+                        <xs:field xpath="@code" />
+                    </xs:unique>
+                </xs:element>
+                <xs:element name="attribute_set" type="attributeSetDeclaration" minOccurs="1" maxOccurs="unbounded">
+                    <xs:unique name="uniqueSetCode">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Attribute code must be unique
+                            </xs:documentation>
+                        </xs:annotation>
+                        <xs:selector xpath="attribute" />
+                        <xs:field xpath="@name" />
+                    </xs:unique>
+                </xs:element>
+            </xs:choice>
         </xs:sequence>
         <xs:attribute name="type" type="identifierType" use="required" />
     </xs:complexType>
