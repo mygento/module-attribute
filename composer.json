@@ -1,7 +1,7 @@
 {
   "name": "mygento/module-attribute",
   "type": "magento2-module",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "license": "OSL-3.0",
   "homepage": "https://github.com/mygento/module-attribute",
   "description": "Magento 2 Declarative Attribute Schema",
