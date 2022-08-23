@@ -44,13 +44,17 @@ class SchemaSetup
         $eavSetup = $this->eavSetupFactory->create();
         $products = $this->data->get('catalog_product') ?? [];
 
-        if (isset($products[ConverterInterface::ATTR])
-            && !empty($products[ConverterInterface::ATTR])) {
+        if (
+            isset($products[ConverterInterface::ATTR])
+            && !empty($products[ConverterInterface::ATTR])
+        ) {
             $this->createAttributes($eavSetup, $products[ConverterInterface::ATTR]);
         }
 
-        if (isset($products[ConverterInterface::SET])
-            && !empty($products[ConverterInterface::SET])) {
+        if (
+            isset($products[ConverterInterface::SET])
+            && !empty($products[ConverterInterface::SET])
+        ) {
             $this->createAttributeSets($eavSetup, $products[ConverterInterface::SET]);
         }
     }
@@ -67,7 +71,6 @@ class SchemaSetup
                     $params
                 );
             } catch (LocalizedException $e) {
-                echo $e->getMessage();
                 $this->logger->error($e->getMessage(), ['exception' => $e]);
             }
         }

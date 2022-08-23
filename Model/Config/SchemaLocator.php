@@ -12,7 +12,10 @@ use Magento\Framework\Module\Dir;
 
 class SchemaLocator implements \Magento\Framework\Config\SchemaLocatorInterface
 {
-    const CONFIG_FILE_SCHEMA = 'attribute_schema.xsd';
+    public const CONFIG_FILE_SCHEMA = 'attribute_schema.xsd';
+
+    private $schema;
+    private $perFileSchema;
 
     /**
      * @param \Magento\Framework\Module\Dir\Reader $moduleReader

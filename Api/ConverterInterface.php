@@ -10,6 +10,6 @@ namespace Mygento\Attribute\Api;
 
 interface ConverterInterface extends \Magento\Framework\Config\ConverterInterface
 {
-    const ATTR = 'attribute';
-    const SET = 'attribute_set';
+    public const ATTR = 'attribute';
+    public const SET = 'attribute_set';
 }
